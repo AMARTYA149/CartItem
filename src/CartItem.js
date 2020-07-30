@@ -1,54 +1,6 @@
 import React from 'react';
 
 class CartItem extends React.Component{
-  
-  increaseQuantity = () => {    //arrow function does automatically binding of the function with the instance
-    // console.log('this.state', this.state);
-    // setState form 1
-    // this.setState({
-    //   qty: this.state.qty + 1
-    // });
-
-    // setState form 2 - if previous State is required
-    this.setState((prevState) => {
-      return{
-        qty: prevState.qty + 1
-      }
-    }, () =>{
-      console.log("this.state", this.state);
-    });
-  }
-
-  decreaseQuantity = () => {
-    const {qty} = this.state;
-    if(qty === 0)
-    {return;}
-
-    this.setState((prevState) => {
-      // if(prevState.qty > 0)  // - my way of handling decreasing qty
-      return {
-        qty: prevState.qty - 1
-      }
-    }, () =>{
-      console.log("this.state", this.state);
-    });
-  }
-
-  // testing() {
-  //   const promise = new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       resolve('done');
-  //     }, 5000);
-  //   })
-
-  //   promise.then(() => {
-  //     //setState acts like a synchronous call
-  //     this.setState({ qty: this.state.qty + 10});
-  //     this.setState({ qty: this.state.qty + 10});
-  //     this.setState({ qty: this.state.qty + 10});
-  //     console.log('state', this.state);
-  //   });
-  // }
 
   render(){
     console.log('this.props', this.props);
@@ -68,13 +20,13 @@ class CartItem extends React.Component{
             alt="increase" 
             className="action-icons" 
             src="https://image.flaticon.com/icons/svg/992/992651.svg" 
-            onClick = {this.increaseQuantity}
+            onClick = {() => this.props.onIncreaseQuantity(this.props.product)}
             />
             <img 
             alt="decrease" 
             className="action-icons" 
             src="https://image.flaticon.com/icons/svg/992/992683.svg"
-            onClick = {this.decreaseQuantity}
+            onClick = {() => this.props.onDecreaseQuantity(this.props.product)}
             />
             <img 
             alt="delete" 
